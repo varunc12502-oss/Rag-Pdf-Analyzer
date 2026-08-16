@@ -1,0 +1,21 @@
+# Core web framework
+streamlit>=1.32.0
+
+# PDF text extraction
+pdfplumber>=0.10.3
+PyPDF2>=3.0.1
+
+# Text chunking (only the splitters sub-package — lighter than full langchain)
+langchain-text-splitters>=0.2.0
+
+# Local embedding model — runs fully offline, no API cost
+sentence-transformers>=2.7.0
+
+# Vector database — local persistent storage
+chromadb>=0.5.0
+
+# LLM API (OpenAI-compatible SDK pointed at OpenRouter)
+openai>=1.30.0
+
+# Environment variable loading for local development
+python-dotenv>=1.0.1

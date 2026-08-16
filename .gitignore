@@ -1,0 +1,27 @@
+# Environment secrets — never commit your real API key
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# ChromaDB local persistence folder (can be large, regenerated on re-upload)
+chroma_store/
+
+# Streamlit cache
+.streamlit/secrets.toml
+
+# OS clutter
+.DS_Store
+Thumbs.db
+
+# Uploaded PDFs (temporary, not part of the repo)
+uploaded_pdfs/
