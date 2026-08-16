@@ -12,7 +12,7 @@ A full-stack **Retrieval-Augmented Generation (RAG)** application that lets you 
 - **Agentic retry** — on low-relevance retrieval, the query is automatically reformulated and retried once
 - **Source attribution** — every answer shows which document and page number it came from, with a similarity score
 - **Chat history** — full conversation memory within a browser session
-- **Free LLM** — powered by OpenRouter's free-tier models (no credit card needed for basic usage)
+- **Free LLM** — powered by Groq's free-tier models (no credit card needed for basic usage)
 
 ---
 
@@ -34,7 +34,7 @@ A full-stack **Retrieval-Augmented Generation (RAG)** application that lets you 
 ├─────────────────────────────────────────────────────────────┤
 │  rag/agent.py       Query reformulation + retry loop         │
 ├─────────────────────────────────────────────────────────────┤
-│  rag/llm.py         OpenRouter API call (OpenAI SDK format)  │
+│  rag/llm.py         Groq API call (OpenAI SDK format)  │
 │                     Grounded answer generation               │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -66,7 +66,7 @@ rag-pdf-analyzer/
     ├── ingest.py           # PDF extraction + text chunking
     ├── embed_store.py      # Embedding + ChromaDB vector store
     ├── retriever.py        # Semantic search + relevance filtering
-    ├── llm.py              # OpenRouter API wrapper + query reformulation
+    ├── llm.py              # Groq API wrapper + query reformulation
     └── agent.py            # Retry loop (reflect + reformulate)
 ```
 
@@ -77,11 +77,11 @@ rag-pdf-analyzer/
 ### Prerequisites
 
 - Python 3.9 or higher
-- An [OpenRouter](https://openrouter.ai) account (free — no credit card required for free-tier models)
+- An [Groq](https://console.groq.com) account (free — no credit card required for free-tier models)
 
-### 1. Get an OpenRouter API key
+### 1. Get an Groq API key
 
-1. Go to [openrouter.ai](https://openrouter.ai) and sign up for a free account.
+1. Go to [console.groq.com](https://console.groq.com) and sign up for a free account.
 2. Navigate to **Keys** → **Create Key**.
 3. Copy the key — it starts with `sk-or-...`.
 
@@ -116,7 +116,7 @@ cp .env.example .env
 Open `.env` and replace the placeholder:
 
 ```
-OPENROUTER_API_KEY=sk-or-your-actual-key-here
+GROQ_API_KEY=sk-or-your-actual-key-here
 ```
 
 ### 4. Run the app
@@ -136,7 +136,7 @@ The app opens at `http://localhost:8501`.
 3. Click **New app**, select the repo and set the main file to `app.py`.
 4. Under **Advanced settings → Secrets**, add:
    ```toml
-   OPENROUTER_API_KEY = "sk-or-your-actual-key-here"
+   GROQ_API_KEY = "sk-or-your-actual-key-here"
    ```
 5. Click **Deploy**. The app will install dependencies from `requirements.txt` automatically.
 
@@ -188,7 +188,7 @@ RAG systems that always answer tend to hallucinate when context is weak. The exp
 
 - **Scanned / image PDFs** are not supported (no OCR). Only digitally-created PDFs with embedded text work.
 - **Very large PDFs** (500+ pages) may be slow to ingest on first upload, depending on hardware.
-- **Free-tier LLM rate limits** on OpenRouter are generous but finite — if you hit them, wait a minute and retry.
+- **Free-tier LLM rate limits** on Groq are generous but finite — if you hit them, wait a minute and retry.
 - **Session isolation**: each browser session gets its own vector store collection. Refreshing the page starts a new session.
 
 ---

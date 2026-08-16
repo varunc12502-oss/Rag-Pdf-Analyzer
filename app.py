@@ -52,11 +52,10 @@ logger = logging.getLogger(__name__)
 CHROMA_PERSIST_DIR = "./chroma_store"
 
 AVAILABLE_MODELS = [
-    "meta-llama/llama-3.1-8b-instruct:free",
-    "meta-llama/llama-3.2-3b-instruct:free",
-    "google/gemma-3-4b-it:free",
-    "mistralai/mistral-7b-instruct:free",
-    "qwen/qwen-2.5-7b-instruct:free",
+    "llama-3.1-8b-instant",
+    "llama-3.3-70b-versatile",
+    "mixtral-8x7b-32768",
+    "gemma2-9b-it",
 ]
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -106,22 +105,22 @@ st.markdown(
 # ═══════════════════════════════════════════════════════════════════════════
 def get_api_key() -> Optional[str]:
     """
-    Read the OpenRouter API key from Streamlit secrets (cloud deployment)
-    or from the OPENROUTER_API_KEY environment variable (local development).
+    Read the Groq API key from Streamlit secrets (cloud deployment)
+    or from the GROQ_API_KEY environment variable (local development).
 
     Streamlit secrets are configured in the app dashboard on
     share.streamlit.io and are accessible via st.secrets at runtime.
     """
     # Streamlit Cloud path: secrets configured in the dashboard
     try:
-        key = st.secrets.get("OPENROUTER_API_KEY")
+        key = st.secrets.get("GROQ_API_KEY")
         if key:
             return key
     except Exception:
         pass
 
     # Local development path: key in .env file loaded by python-dotenv above
-    return os.getenv("OPENROUTER_API_KEY")
+    return os.getenv("GROQ_API_KEY")
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -163,7 +162,7 @@ init_session_state()
 @st.cache_resource(show_spinner=False)
 def _cached_llm_client(api_key: str) -> object:
     """
-    Cache the OpenAI/OpenRouter client across reruns.
+    Cache the OpenAI/Groq client across reruns.
     @st.cache_resource persists the object for the lifetime of the app server.
     """
     return get_llm_client(api_key)
@@ -183,7 +182,7 @@ with st.sidebar:
         st.error(
             "**API key not configured.**\n\n"
             "Create a `.env` file with:\n"
-            "```\nOPENROUTER_API_KEY=your_key_here\n```\n\n"
+            "```\nGROQ_API_KEY=your_key_here\n```\n\n"
             "Or add it to Streamlit secrets when deploying to the cloud.",
         )
         st.stop()
@@ -195,7 +194,7 @@ with st.sidebar:
         "Model",
         options=AVAILABLE_MODELS,
         index=0,
-        help="All listed models are free-tier on OpenRouter — no billing required.",
+        help="All listed models are available on Groq's free tier.",
     )
 
     top_k = st.slider(

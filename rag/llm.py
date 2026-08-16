@@ -23,23 +23,19 @@ from openai import OpenAI, RateLimitError, APIError, APIConnectionError, APIStat
 
 logger = logging.getLogger(__name__)
 
-# Default free-tier model on OpenRouter.
-# The ":free" suffix indicates models that don't consume OpenRouter credits.
-DEFAULT_MODEL = "meta-llama/llama-3.1-8b-instruct:free"
+# Default Groq model
+DEFAULT_MODEL = "llama-3.1-8b-instant"
 
 MAX_RESPONSE_TOKENS = 1024
 
 
 def get_llm_client(api_key: str) -> OpenAI:
     """
-    Initialise and return an OpenAI client pointed at OpenRouter's endpoint.
-
-    The OpenAI SDK is model-agnostic: by changing `base_url` we can use
-    any OpenAI-API-compatible backend without touching the rest of the code.
+    Initialise and return an OpenAI client pointed at Groq's endpoint.
     """
     return OpenAI(
         api_key=api_key,
-        base_url="https://openrouter.ai/api/v1",
+        base_url="https://api.groq.com/openai/v1",
     )
 
 
@@ -125,18 +121,18 @@ def generate_answer(
 
     except RateLimitError:
         raise RuntimeError(
-            "Rate limit reached on OpenRouter. Please wait a moment and try again."
+            "Rate limit reached on Groq. Please wait a moment and try again."
         )
     except APIConnectionError:
         raise RuntimeError(
-            "Could not reach the OpenRouter API. Please check your internet connection."
+            "Could not reach the Groq API. Please check your internet connection."
         )
     except APIStatusError as e:
         raise RuntimeError(
-            f"OpenRouter returned an error (HTTP {e.status_code}): {e.message}"
+            f"Groq returned an error (HTTP {e.status_code}): {e.message}"
         )
     except APIError as e:
-        raise RuntimeError(f"OpenRouter API error: {e}")
+        raise RuntimeError(f"Groq API error: {e}")
     except Exception as e:
         raise RuntimeError(f"Unexpected error calling the LLM: {e}")
 
