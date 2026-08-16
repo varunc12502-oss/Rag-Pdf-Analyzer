@@ -205,7 +205,7 @@ with st.sidebar:
 
     distance_threshold = st.slider(
         "Relevance threshold",
-        min_value=0.10, max_value=1.00, value=0.60, step=0.05,
+        min_value=0.50, max_value=1.00, value=0.85, step=0.05,
         help=(
             "Cosine distance cutoff. Chunks more distant than this are ignored. "
             "Lower values are stricter (fewer but more relevant chunks)."

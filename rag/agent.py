@@ -42,7 +42,7 @@ def retrieve_with_fallback(
     client: OpenAI,
     query: str,
     top_k: int = 5,
-    distance_threshold: float = 0.6,
+    distance_threshold: float = 0.85,
     model: str = "meta-llama/llama-3.1-8b-instruct:free",
 ) -> Tuple[List[Dict[str, Any]], bool, Optional[str]]:
     """

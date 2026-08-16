@@ -29,7 +29,7 @@ def retrieve_relevant_chunks(
     collection: Any,
     query: str,
     top_k: int = 5,
-    distance_threshold: float = 0.6,
+    distance_threshold: float = 0.85,
 ) -> List[Dict[str, Any]]:
     """
     Find the top-k most semantically similar chunks to the query,
