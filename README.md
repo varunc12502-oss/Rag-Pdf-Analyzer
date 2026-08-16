@@ -1,5 +1,9 @@
 # DocMind — RAG-Powered PDF Analyzer
 
+🌍 **Live Demo:** [https://rag-pdf-analyzer-egzu2y7fgdkcy8epjnheyt.streamlit.app/](https://rag-pdf-analyzer-egzu2y7fgdkcy8epjnheyt.streamlit.app/)
+
+> **About this project:** I built this as a basic foundational project during my first year of college. It allowed me to apply the core concepts of Artificial Intelligence that I've been learning — including Large Language Models (LLMs), neural networks, embeddings, API integrations, and Retrieval-Augmented Generation (RAG) pipelines.
+
 A full-stack **Retrieval-Augmented Generation (RAG)** application that lets you upload PDF documents and ask natural-language questions about them. Answers are sourced exclusively from the uploaded content, with cited page references for every response.
 
 ---
@@ -153,7 +157,7 @@ All settings are accessible in the sidebar at runtime:
 |---------|---------|-------------|
 | Model | `llama-3.1-8b-instruct:free` | LLM for answer generation and query reformulation |
 | Chunks to retrieve | 5 | How many document segments to fetch per question |
-| Relevance threshold | 0.60 | Cosine distance cutoff — higher = more permissive |
+| Relevance threshold | 0.85 | Cosine distance cutoff — higher = more permissive |
 
 ### Relevance threshold guide
 
