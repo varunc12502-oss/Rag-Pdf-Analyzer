@@ -24,7 +24,7 @@ from openai import OpenAI, RateLimitError, APIError, APIConnectionError, APIStat
 logger = logging.getLogger(__name__)
 
 # Default Groq model
-DEFAULT_MODEL = "llama-3.1-8b-instant"
+DEFAULT_MODEL = "llama3-8b-8192"
 
 MAX_RESPONSE_TOKENS = 1024
 
